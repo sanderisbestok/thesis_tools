@@ -19,22 +19,19 @@ import random
 # |  | -- annotations.json
 
 
-# In de json staat: 
-
-# {
-#   "annotations": [
+# annotations.json:
+# { 
+#     "CARDS_OFFICE_H_T_frame_0001.jpg": 
 #     {
-#         "file_name": "img_01",
-#         "segmentation": segmentations
+#         "name": "CARDS_OFFICE_H_T_frame_0001.jpg",
+#         "objects": [[]]
 #     },
+#     "CARDS_OFFICE_H_T_frame_0002.jpg":
 #     {
-#       "file_name": "img_02",
-      
-# deze json kan dan gemakkelijk worden omgezet naar het desbetreffende algoritme.
-# echter deze json zo simpel mogelijk houden, want deze moet voor elke dataset opnieuw gebouwd worden
-# alle info die via omweg uit de json gehaald kan worden, zorgen dat deze in de losse files eruit wordt gehaald.
-# dus de alle hele segmentations erin, hier kunnen immers de bboxes uitgehaald worden. (loop per file over alle segmentations heen
-# ) De folders kunnen symlinks hebben naar de images in hun eigen structuur.
+#         "name": "CARDS_OFFICE_H_T_frame_0002.jpg",
+#         "objects": [[]]
+#     }
+# }
 
 ROOT_DIR = "../egohands_data"
 ANNOTATION_FILE = "polygons.mat"
@@ -138,19 +135,18 @@ def split_train_val():
 
     shutil.rmtree(tmp_dir)
 
-    
+def move_to_folder():
+    os.makedirs(os.path.join(ROOT_DIR, "json"))
+    json_dir = os.path.join(ROOT_DIR, "json")
+    shutil.move(os.path.join(ROOT_DIR, "test"), json_dir)
+    shutil.move(os.path.join(ROOT_DIR, "val"), json_dir)
+    shutil.move(os.path.join(ROOT_DIR, "train"), json_dir)
 
-        
-
-
+    shutil.move(ROOT_DIR, "../data")
 
 
 split_test()
 json_test()
-
 json_train_val()
-
-# shutil.rmtree(os.path.join(ROOT_DIR, "val"))
-# shutil.rmtree(os.path.join(ROOT_DIR, "train"))
-
 split_train_val()
+move_to_folder()

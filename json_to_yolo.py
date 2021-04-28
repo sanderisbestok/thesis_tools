@@ -26,20 +26,20 @@ def create_annotations():
             data = json.load(json_file)
 
             for key, value in data.items():
-                bboxes = []
+                bboxes = []              
 
                 for segmentation in value["objects"]:
                     seg_np = np.array(segmentation)
                 
-                    min_x = min(seg_np[:,0])
-                    max_x = max(seg_np[:,0])
-                    min_y = min(seg_np[:,1])
-                    max_y = max(seg_np[:,1])
+                    min_x = min(seg_np[:,0]) / 1280
+                    max_x = max(seg_np[:,0]) / 1280
+                    min_y = min(seg_np[:,1]) / 720
+                    max_y = max(seg_np[:,1]) / 720
 
-                    box_width = max_x-min_x
-                    box_height = max_y-min_y
-                    center_x = max_x - (box_width/2)
-                    center_y = max_y - (box_height/2)
+                    box_width = (max_x-min_x)
+                    box_height = (max_y-min_y)
+                    center_x = (max_x - (box_width/2))
+                    center_y = (max_y - (box_height/2))
 
                     bboxes.append([object_class, center_x, center_y, box_width, box_height])
 
@@ -49,5 +49,5 @@ def create_annotations():
 
 
 
-# create_folders()
+create_folders()
 create_annotations()

@@ -50,10 +50,14 @@ def create_folders():
     os.symlink("../../json/test/images", os.path.join(ROOT_DIR, "extremenet", "images", "test"))
 
 def create_annotations():
-    segmentation_id = 1
+    image_id = 0
+    segmentation_id = 0
     category_info = {'id': 1, 'is_crowd': 0}
 
     for dir_name in os.listdir(os.path.join(ROOT_DIR, "json")):
+        coco_output["images"] = []
+        coco_output["annotations"] = []
+        
         with open(os.path.join(ROOT_DIR, "json", dir_name, 'annotations.json')) as json_file:
             data = json.load(json_file)
 
@@ -90,7 +94,7 @@ def create_annotations():
                 
                     segmentation_id += 1
                     
-                image_id = image_id + 1
+                image_id += 1
 
         with open(os.path.join(ROOT_DIR, "extremenet", "annotations", "annotations_" + dir_name + ".json"), 'w') as output_json_file:
             json.dump(coco_output, output_json_file)
@@ -101,5 +105,5 @@ def create_annotations():
 
 
 
-# create_folders()
+create_folders()
 create_annotations()
