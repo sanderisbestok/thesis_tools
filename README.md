@@ -5,7 +5,7 @@ The three different algorithms produce results in different formats:
 
 Yolo unrelative maken
 
-Standaard class name xywh
+Standaard classname conf xywh
 
 1. 
 
