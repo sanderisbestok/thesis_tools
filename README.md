@@ -16,6 +16,7 @@ The results can be converted using Object-Detection-Metrics with the following c
 
 ```
 python pascalvoc.py --gt ../../data/groundtruth/val --det ../../results/yolov5/ -detcoords rel -imgsize 1280,720 --start 0 --stop 0 --step 1
-python pascalvoc.py --gt ../../data/groundtruth/val --det ../../results/ExtremeNet/ --start 250 --stop 10000 --step 250 -np
+thon pascalvoc.py --gt ../../data/groundtruth/val --det ../../results/ExtremeNet/ --start 0 --stop 2500 --step 50 -np
+
 ```
 
