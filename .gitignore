@@ -1,0 +1,120 @@
+
+
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+Object-Detection-Metrics/__pycache__/
+Object-Detection-Metrics/*.py[cod]
+Object-Detection-Metrics/*$py.class
+
+# C extensions
+Object-Detection-Metrics/*.so
+
+#samples
+Object-Detection-Metrics/samples/
+
+# Distribution / packaging
+Object-Detection-Metrics/.Python
+Object-Detection-Metrics/build/
+Object-Detection-Metrics/develop-eggs/
+Object-Detection-Metrics/dist/
+Object-Detection-Metrics/downloads/
+Object-Detection-Metrics/eggs/
+Object-Detection-Metrics/.eggs/
+Object-Detection-Metrics/lib64/
+Object-Detection-Metrics/parts/
+Object-Detection-Metrics/sdist/
+Object-Detection-Metrics/var/
+Object-Detection-Metrics/wheels/
+Object-Detection-Metrics/*.egg-info/
+Object-Detection-Metrics/.installed.cfg
+Object-Detection-Metrics/*.egg
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+Object-Detection-Metrics/*.manifest
+Object-Detection-Metrics/*.spec
+
+# Installer logs
+Object-Detection-Metrics/pip-log.txt
+Object-Detection-Metrics/pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+Object-Detection-Metrics/htmlcov/
+Object-Detection-Metrics/.tox/
+Object-Detection-Metrics/.coverage
+Object-Detection-Metrics/.coverage.*
+Object-Detection-Metrics/.cache
+Object-Detection-Metrics/.pytest_cache/
+Object-Detection-Metrics/nosetests.xml
+Object-Detection-Metrics/coverage.xml
+Object-Detection-Metrics/*.cover
+Object-Detection-Metrics/.hypothesis/
+
+# Translations
+Object-Detection-Metrics/*.mo
+Object-Detection-Metrics/*.pot
+
+# Flask stuff:
+Object-Detection-Metrics/instance/
+Object-Detection-Metrics/.webassets-cache
+
+# Scrapy stuff:
+Object-Detection-Metrics/.scrapy
+
+# Sphinx documentation
+Object-Detection-Metrics/docs/_build/
+
+# PyBuilder
+Object-Detection-Metrics/target/
+
+# Jupyter Notebook
+Object-Detection-Metrics/.ipynb_checkpoints
+
+# pyenv
+Object-Detection-Metrics/.python-version
+
+# celery beat schedule file
+Object-Detection-Metrics/celerybeat-schedule.*
+
+# SageMath parsed files
+Object-Detection-Metrics/*.sage.py
+
+# Environments
+Object-Detection-Metrics/.env
+Object-Detection-Metrics/.venv
+Object-Detection-Metrics/env/
+Object-Detection-Metrics/venv/
+Object-Detection-Metrics/ENV/
+Object-Detection-Metrics/env.bak/
+Object-Detection-Metrics/venv.bak/
+
+# Spyder project settings
+Object-Detection-Metrics/.spyderproject
+Object-Detection-Metrics/.spyproject
+
+# Rope project settings
+Object-Detection-Metrics/.ropeproject
+
+# mkdocs documentation
+Object-Detection-Metrics//site
+
+# mypy
+Object-Detection-Metrics/.mypy_cache/
+
+### VisualStudioCode ###
+Object-Detection-Metrics/.vscode/
+Object-Detection-Metrics/.vscode/*
+Object-Detection-Metrics/!.vscode/settings.json
+Object-Detection-Metrics/!.vscode/tasks.json
+Object-Detection-Metrics/!.vscode/launch.json
+Object-Detection-Metrics/!.vscode/extensions.json
+Object-Detection-Metrics/.history
+
+# My stuff
+Object-Detection-Metrics/ToDo.txt
+Object-Detection-Metrics/test.py
+Object-Detection-Metrics/references/
+Object-Detection-Metrics/aux_images/older_version/
+Object-Detection-Metrics/3rd_party/
