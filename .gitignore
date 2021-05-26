@@ -11,7 +11,7 @@ Object-Detection-Metrics/*$py.class
 Object-Detection-Metrics/*.so
 
 #samples
-Object-Detection-Metrics/samples/
+Object-Detection-Metrics/samples/*
 
 # Distribution / packaging
 Object-Detection-Metrics/.Python
