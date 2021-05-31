@@ -172,6 +172,7 @@ def getBoundingBoxes(directory,
                                  imgSize,
                                  BBType.GroundTruth,
                                  format=bbFormat)
+                allBoundingBoxes.addBoundingBox(bb)
             else:
                 # idClass = int(splitLine[0]) #class
                 idClass = (splitLine[0])  # class
@@ -180,18 +181,20 @@ def getBoundingBoxes(directory,
                 y = float(splitLine[3])
                 w = float(splitLine[4])
                 h = float(splitLine[5])
-                bb = BoundingBox(nameOfImage,
-                                 idClass,
-                                 x,
-                                 y,
-                                 w,
-                                 h,
-                                 coordType,
-                                 imgSize,
-                                 BBType.Detected,
-                                 confidence,
-                                 format=bbFormat)
-            allBoundingBoxes.addBoundingBox(bb)
+                
+                if confidence > -0.01:
+                    bb = BoundingBox(nameOfImage,
+                                    idClass,
+                                    x,
+                                    y,
+                                    w,
+                                    h,
+                                    coordType,
+                                    imgSize,
+                                    BBType.Detected,
+                                    confidence,
+                                    format=bbFormat)
+                    allBoundingBoxes.addBoundingBox(bb)
             if idClass not in allClasses:
                 allClasses.append(idClass)
         fh1.close()
@@ -206,14 +209,10 @@ VERSION = '0.2 (beta)'
 with open('message.txt', 'r') as f:
     message = f'\n\n{f.read()}\n\n'
 
-print(message)
+# print(message)
 
 parser = argparse.ArgumentParser(
     prog='Object Detection Metrics - Pascal VOC',
-    description=
-    f'{message}\nThis project applies the most popular metrics used to evaluate object detection '
-    'algorithms.\nThe current implemention runs the Pascal VOC metrics.\nFor further references, '
-    'please check:\nhttps://github.com/rafaelpadilla/Object-Detection-Metrics',
     epilog="Developed by: Rafael Padilla (rafael.padilla@smt.ufrj.br)")
 parser.add_argument('-v', '--version', action='version', version='%(prog)s ' + VERSION)
 # Positional arguments

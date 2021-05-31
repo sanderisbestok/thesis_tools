@@ -87,6 +87,8 @@ class BoundingBox:
             self._width_img = imgSize[0]
             self._height_img = imgSize[1]
 
+        # print(self._x, self._y, self._w, self._h)
+
     def getAbsoluteBoundingBox(self, format=BBFormat.XYWH):
         if format == BBFormat.XYWH:
             return (self._x, self._y, self._w, self._h)
