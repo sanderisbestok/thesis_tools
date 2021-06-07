@@ -115,7 +115,7 @@ def split_train_val():
     with open(os.path.join(tmp_dir, 'annotations.json')) as json_file:
         data = json.load(json_file)
 
-        # 0.1765 is 15% van 100%
+        # 0.1765 is 15% van 100% omdat test al 20 % is (niet helemaal)
         val_keys = random.sample(list(data), round(len(data) * 0.1765))
 
         validation = {k: v for k, v in data.items() if k in val_keys}

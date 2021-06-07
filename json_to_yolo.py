@@ -31,10 +31,10 @@ def create_annotations():
                 for segmentation in value["objects"]:
                     seg_np = np.array(segmentation)
                 
-                    min_x = min(seg_np[:,0]) / 1280
-                    max_x = max(seg_np[:,0]) / 1280
-                    min_y = min(seg_np[:,1]) / 720
-                    max_y = max(seg_np[:,1]) / 720
+                    min_x = min(seg_np[:,0]) / 480
+                    max_x = max(seg_np[:,0]) / 480
+                    min_y = min(seg_np[:,1]) / 360
+                    max_y = max(seg_np[:,1]) / 360
 
                     box_width = (max_x-min_x)
                     box_height = (max_y-min_y)
