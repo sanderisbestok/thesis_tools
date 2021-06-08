@@ -277,6 +277,12 @@ parser.add_argument('-np',
                     dest='showPlot',
                     action='store_false',
                     help='no plot is shown during execution')
+parser.add_argument('-network',
+                    dest='network',
+                    help='give network name, extremenet, tridentnet or yolov5')
+parser.add_argument('-testset',
+                    dest='testset',
+                    help='give test set name, egohands,')
 
 
 args = parser.parse_args()
@@ -377,6 +383,29 @@ evaluator = Evaluator()
 acc_AP = 0
 validClasses = 0
 
+network = args.network
+testset = args.testset
+
+if (network == "extremenet"):
+    networkColor = 'g'
+    networkName = 'ExtremeNet'
+elif (network == "yolov5"):
+    networkColor = 'r'
+    networkName = 'YOLOv5'
+elif (network == "tridentnet"):
+    networkColor = 'b'
+    networkName = 'TridentNet'
+else:
+    networkColor = 'm'
+    networkName = 'Unkown Network'
+
+if (testset == "egohands"):
+    testsetString = "EgoHands test set"
+elif (testset == "mittal"):
+    testsetString = "Hand Dataset"
+else:
+    testsetString = "unknown test set"
+
 # Plot Precision x Recall curve
 detections = evaluator.PlotPrecisionRecallCurve(
     allBoundingBoxes,  # Object containing all bounding boxes (ground truths and detections)
@@ -385,7 +414,10 @@ detections = evaluator.PlotPrecisionRecallCurve(
     showAP=True,  # Show Average Precision in the title of the plot
     showInterpolatedPrecision=False,  # Don't plot the interpolated precision curve
     savePath=savePath,
-    showGraphic=showPlot)
+    showGraphic=showPlot,
+    color=networkColor,
+    name=networkName,
+    testset=testsetString)
 
 f = open(os.path.join(savePath, 'results.txt'), 'w')
 f.write('Object Detection Metrics\n')

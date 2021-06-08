@@ -155,7 +155,10 @@ class Evaluator:
                                  showAP=False,
                                  showInterpolatedPrecision=False,
                                  savePath=None,
-                                 showGraphic=True):
+                                 showGraphic=True,
+                                 color='r',
+                                 name='unknown network',
+                                 testset='unkown test set'):
         """PlotPrecisionRecallCurve
         Plot the Precision x Recall curve for a given class.
         Args:
@@ -221,16 +224,15 @@ class Evaluator:
                             nrec.append(r)
                             nprec.append(max([mpre[int(id)] for id in idxEq]))
                     plt.plot(nrec, nprec, 'or', label='11-point interpolated precision')
-            plt.plot(recall, precision, label='Precision')
+            plt.plot(recall, precision, color)
             plt.xlabel('recall')
             plt.ylabel('precision')
             if showAP:
                 ap_str = "{0:.2f}%".format(average_precision * 100)
                 # ap_str = "{0:.4f}%".format(average_precision * 100)
-                plt.title('Precision x Recall curve \nClass: %s, AP: %s' % (str(classId), ap_str))
+                plt.title('Precision x Recall curve of %s on %s\nClass: Hand, AP: %s' % (name, testset, ap_str))
             else:
                 plt.title('Precision x Recall curve \nClass: %s' % str(classId))
-            plt.legend(shadow=True)
             plt.grid()
             ############################################################
             # Uncomment the following block to create plot with points #
