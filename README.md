@@ -23,7 +23,8 @@ python create_results.py --gt ../../data/groundtruth/val --det ../../../experime
 For the testing:
 
 ```
-python create_test_results.py --gt ../../data/groundtruth/test/ --det ../../../experiments/experiment_1/test_results/extremenet/
+python create_test_results.py --gt ../../data/groundtruth/test/ --det ../../../experiments/experiment_1/test_results_ego/extremenet/ -network extremenet -testset egohands
+python create_test_results.py --gt ../../processed_data/mittel_zisserman/annotations/ --det ../../../experiments/experiment_1/test_results_mittel/trident/ -network tridentnet -testset mittal
 ```
 
 ## Clear the following locations
