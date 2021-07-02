@@ -1,6 +1,28 @@
 # thesis_tools
 
-## Results
+## Installation
+Create environment with all requried packages
+
+conda create -​n <environment-name> --file req.txt
+
+## Data scripts  
+To go to the JSON format from datasets the following scripts can be used.
+
+```
+python ego_to_json.py
+python cocohand_to_json.py # this script will merge coco hand and coco to get segmentations
+```  
+
+From the JSON to the input formats and groundtruth
+```
+python json_to_extremenet.py # also for trident goes to COCO format
+python json_to_groundtruth.py
+python json_to_yolo.py
+python mittel_to_groundtruth.py
+```
+ 
+  
+## Result scripts
 The three different algorithms produce results in different formats:
 
 Yolo unrelative maken
