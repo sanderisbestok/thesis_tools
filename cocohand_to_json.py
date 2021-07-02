@@ -48,8 +48,8 @@ import json
 import random
 
 pp = pprint.PrettyPrinter(indent=4)
-IMG_SOURCE = '/media/sander/Elements/datasets/raw_data/COCO_Hand_raw/COCO-Hand-Big/COCO-Hand-Big_Images'
-SAVE_DIR = '/media/sander/Elements/datasets/processed_data/cocohands/'
+IMG_SOURCE = '/media/sander/Elements/datasets/raw_data/COCO_Hand_raw/COCO-Hand-Big/COCO-Hand-big_Images'
+SAVE_DIR = '/media/sander/Elements/datasets/processed_data/cocohands-s/'
 SAVE_FILE = 'annotations.json'
 
 def get_cocohand_annotations():
@@ -78,6 +78,10 @@ def get_coco_segmentations(coco_hand_images):
     coco_val=COCO('/media/sander/Elements/datasets/raw_data/coco_annotations/instances_val2014.json')
     coco_segmentations = {}
 
+
+    train_ids = []
+    val_ids = []
+
     for image_name in sorted(coco_hand_images):
         train = True
         
@@ -85,11 +89,11 @@ def get_coco_segmentations(coco_hand_images):
 
         try:
             img = coco_train.loadImgs(image_id)
-
+            train_ids.append(image_name)
             coco = coco_train
         except:
             img = coco_val.loadImgs(image_id)
-            
+            val_ids.append(image_name)
             coco = coco_val
 
         height = img[0]["height"] 
@@ -121,9 +125,9 @@ def get_coco_segmentations(coco_hand_images):
                 else:
                     coco_segmentations[image_name] = [segmentation_tuples]
 
-    return coco_segmentations
+    return coco_segmentations, train_ids, val_ids
 
-def get_bboxes(images, cocohand_annotations, coco_segmentations):
+def get_bboxes(images, cocohand_annotations, coco_segmentations, train_ids, val_ids):
     intersections = {}
     images_to_drop = []
 
@@ -165,47 +169,56 @@ def get_bboxes(images, cocohand_annotations, coco_segmentations):
         if delete:
             images_to_drop.append(image_name)
 
+
     # actual images droppen
     for key in images_to_drop:
         if key in intersections:
             del intersections[key]
+        if key in train_ids:
+            train_ids.remove(key)
+        if key in val_ids:
+            val_ids.remove(key)
+
+
+    print(len(train_ids))
+    print(len(val_ids))
 
     return intersections
     
 
 
-# cocohand_annotations = get_cocohand_annotations()
+cocohand_annotations = get_cocohand_annotations()
 
-# images = cocohand_annotations.keys()
+images = cocohand_annotations.keys()
 
-# coco_segmentations = get_coco_segmentations(images)
+coco_segmentations, train_ids, val_ids = get_coco_segmentations(images)
 
-# all_bboxes = get_bboxes(images, cocohand_annotations, coco_segmentations)
+all_bboxes = get_bboxes(images, cocohand_annotations, coco_segmentations, train_ids, val_ids)
 
+exit()
 
-
-# os.makedirs(os.path.join(SAVE_DIR, "tmp"))
+os.makedirs(os.path.join(SAVE_DIR, "tmp"))
 tmp_dir = os.path.join(SAVE_DIR, "tmp")
 tmp_img_dir = os.path.join(tmp_dir, "images")
 
-# shutil.copytree(IMG_SOURCE, os.path.join(img_dir))
+shutil.copytree(IMG_SOURCE, os.path.join(tmp_img_dir))
 
 
-# annotations = {}
+annotations = {}
 
-# for image_name, bboxes in all_bboxes.items():
-#     image = {
-#         "name": image_name,
-#         "objects": []
-#     }
+for image_name, bboxes in all_bboxes.items():
+    image = {
+        "name": image_name,
+        "objects": []
+    }
     
-#     for bbox in bboxes:
-#         image["objects"].append(list(bbox.exterior.coords))
+    for bbox in bboxes:
+        image["objects"].append(list(bbox.exterior.coords))
 
-#     annotations[image_name] = image
+    annotations[image_name] = image
 
-# with open(os.path.join(tmp_dir, SAVE_FILE), 'w') as output_json_file:
-#     json.dump(annotations, output_json_file)    
+with open(os.path.join(tmp_dir, SAVE_FILE), 'w') as output_json_file:
+    json.dump(annotations, output_json_file)    
 
 
 # .json weer inladen, afbeeldingen verplaatsen (nu al gedaan naar cocohands/images)
@@ -233,7 +246,7 @@ with open(os.path.join(tmp_dir, 'annotations.json')) as json_file:
     train = {k: v for k, v in data.items() if k in train_keys}
     not_train = {k: v for k, v in data.items() if k not in train_keys}
 
-    val_keys = random.sample(list(not_train), round(len(not_train) * 0.5))    
+    val_keys = random.sample(list(not_train), round(len(not_train) * 0.5))
 
     validation = {k: v for k, v in not_train.items() if k in val_keys}
     test = {k: v for k, v in not_train.items() if k not in val_keys}

@@ -40,21 +40,46 @@ SAVE_FILE = "annotations.json"
 
 def split_test():
     os.makedirs(os.path.join(ROOT_DIR, "test"))
+    os.makedirs(os.path.join(ROOT_DIR, "val"))
+    os.makedirs(os.path.join(ROOT_DIR, "train"))
     
-    shutil.move(os.path.join(ROOT_DIR, "CARDS_OFFICE_B_S"), os.path.join(ROOT_DIR, "test", "CARDS_OFFICE_B_S"))
-    shutil.move(os.path.join(ROOT_DIR, "CARDS_OFFICE_H_T"), os.path.join(ROOT_DIR, "test", "CARDS_OFFICE_H_T"))
+    shutil.move(os.path.join(ROOT_DIR, "CARDS_COURTYARD_B_T"), os.path.join(ROOT_DIR, "test", "CARDS_COURTYARD_B_T"))
     shutil.move(os.path.join(ROOT_DIR, "CARDS_OFFICE_S_B"), os.path.join(ROOT_DIR, "test", "CARDS_OFFICE_S_B"))
-    shutil.move(os.path.join(ROOT_DIR, "CARDS_OFFICE_T_H"), os.path.join(ROOT_DIR, "test", "CARDS_OFFICE_T_H"))
-    shutil.move(os.path.join(ROOT_DIR, "PUZZLE_COURTYARD_B_S"), os.path.join(ROOT_DIR, "test", "PUZZLE_COURTYARD_B_S"))
+    shutil.move(os.path.join(ROOT_DIR, "CHESS_COURTYARD_B_T"), os.path.join(ROOT_DIR, "test", "CHESS_COURTYARD_B_T"))
+    shutil.move(os.path.join(ROOT_DIR, "CHESS_LIVINGROOM_T_H"), os.path.join(ROOT_DIR, "test", "CHESS_LIVINGROOM_T_H"))   
+    shutil.move(os.path.join(ROOT_DIR, "JENGA_LIVINGROOM_S_T"), os.path.join(ROOT_DIR, "test", "JENGA_LIVINGROOM_S_T"))
+    shutil.move(os.path.join(ROOT_DIR, "JENGA_OFFICE_H_T"), os.path.join(ROOT_DIR, "test", "JENGA_OFFICE_H_T"))
     shutil.move(os.path.join(ROOT_DIR, "PUZZLE_COURTYARD_H_T"), os.path.join(ROOT_DIR, "test", "PUZZLE_COURTYARD_H_T"))
-    shutil.move(os.path.join(ROOT_DIR, "PUZZLE_COURTYARD_S_B"), os.path.join(ROOT_DIR, "test", "PUZZLE_COURTYARD_S_B"))
+    shutil.move(os.path.join(ROOT_DIR, "PUZZLE_LIVINGROOM_T_B"), os.path.join(ROOT_DIR, "test", "PUZZLE_LIVINGROOM_T_B"))
+
+    shutil.move(os.path.join(ROOT_DIR, "CARDS_LIVINGROOM_S_H"), os.path.join(ROOT_DIR, "val", "CARDS_LIVINGROOM_S_H"))
+    shutil.move(os.path.join(ROOT_DIR, "CHESS_COURTYARD_H_S"), os.path.join(ROOT_DIR, "val", "CHESS_COURTYARD_H_S"))
+    shutil.move(os.path.join(ROOT_DIR, "JENGA_COURTYARD_T_S"), os.path.join(ROOT_DIR, "val", "JENGA_COURTYARD_T_S"))
+    shutil.move(os.path.join(ROOT_DIR, "PUZZLE_OFFICE_S_T"), os.path.join(ROOT_DIR, "val", "PUZZLE_OFFICE_S_T"))
+
+    train = ['CARDS_COURTYARD_H_S','CARDS_COURTYARD_S_H','CARDS_COURTYARD_T_B','CARDS_LIVINGROOM_B_T','CARDS_LIVINGROOM_H_S','CARDS_LIVINGROOM_T_B','CARDS_OFFICE_B_S','CARDS_OFFICE_H_T','CARDS_OFFICE_T_H','CHESS_COURTYARD_S_H','CHESS_COURTYARD_T_B','CHESS_LIVINGROOM_B_S','CHESS_LIVINGROOM_H_T','CHESS_LIVINGROOM_S_B','CHESS_OFFICE_B_S','CHESS_OFFICE_H_T','CHESS_OFFICE_S_B','CHESS_OFFICE_T_H','JENGA_COURTYARD_B_H','JENGA_COURTYARD_H_B','JENGA_COURTYARD_S_T','JENGA_LIVINGROOM_B_H','JENGA_LIVINGROOM_H_B','JENGA_LIVINGROOM_T_S','JENGA_OFFICE_B_S','JENGA_OFFICE_S_B','JENGA_OFFICE_T_H','PUZZLE_COURTYARD_B_S','PUZZLE_COURTYARD_S_B','PUZZLE_COURTYARD_T_H','PUZZLE_LIVINGROOM_B_T','PUZZLE_LIVINGROOM_H_S','PUZZLE_LIVINGROOM_S_H','PUZZLE_OFFICE_B_H','PUZZLE_OFFICE_H_B','PUZZLE_OFFICE_T_S']
+
+    for folder in train:
+        shutil.move(os.path.join(ROOT_DIR, folder), os.path.join(ROOT_DIR, "train", folder))
 
 def json_test():
-    test_dir = os.path.join(ROOT_DIR, "test")
-    os.makedirs(os.path.join(test_dir, "images"))
-    img_dir = os.path.join(test_dir, "images")
+    # test_dir = os.path.join(ROOT_DIR, "test")
+    # os.makedirs(os.path.join(test_dir, "images"))
+    # img_dir = os.path.join(test_dir, "images")
 
-    create_annotations(test_dir,img_dir)
+    # create_annotations(test_dir,img_dir)
+
+    # val_dir = os.path.join(ROOT_DIR, "val")
+    # os.makedirs(os.path.join(val_dir, "images"))
+    # img_dir = os.path.join(val_dir, "images")
+
+    # create_annotations(val_dir,img_dir)
+
+    train_dir = os.path.join(ROOT_DIR, "train")
+    # os.makedirs(os.path.join(train_dir, "images"))
+    img_dir = os.path.join(train_dir, "images")
+
+    create_annotations(train_dir,img_dir)
 
    
 def json_train_val():
@@ -145,8 +170,8 @@ def move_to_folder():
     shutil.move(ROOT_DIR, "../data")
 
 
-split_test()
+# split_test()
 json_test()
-json_train_val()
-split_train_val()
+# json_train_val()
+# split_train_val()
 move_to_folder()

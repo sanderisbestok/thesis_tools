@@ -402,7 +402,7 @@ else:
 if (testset == "egohands"):
     testsetString = "EgoHands test set"
 elif (testset == "mittal"):
-    testsetString = "Hand Dataset"
+    testsetString = "Hand Dataset (Mittal et al.)"
 else:
     testsetString = "unknown test set"
 

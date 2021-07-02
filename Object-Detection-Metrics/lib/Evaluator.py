@@ -227,10 +227,13 @@ class Evaluator:
             plt.plot(recall, precision, color)
             plt.xlabel('recall')
             plt.ylabel('precision')
+            # plt.xlim([0,1])
+            # plt.ylim([0,1])
             if showAP:
                 ap_str = "{0:.2f}%".format(average_precision * 100)
                 # ap_str = "{0:.4f}%".format(average_precision * 100)
-                plt.title('Precision x Recall curve of %s on %s\nClass: Hand, AP: %s' % (name, testset, ap_str))
+                plt.title('Precision x Recall curve of %s \ntrained on COCO Hands Segmented\n tested on %s' % (name, testset))
+                # plt.title('Precision x Recall curve of %s on %s\nClass: Hand%s' % (name, testset, ap_str))
             else:
                 plt.title('Precision x Recall curve \nClass: %s' % str(classId))
             plt.grid()
@@ -285,6 +288,7 @@ class Evaluator:
             #                 xytext=vecPositions[idx], textcoords='offset points',
             #                 arrowprops=dict(arrowstyle="->", connectionstyle="arc3"),
             #                 bbox=box)
+            plt.savefig('/home/sander/1.png', bbox_inches='tight')
             if savePath is not None:
                 plt.savefig(os.path.join(savePath, classId + '.png'))
             if showGraphic is True:
